@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Asimovian&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+body {
+  background:rgb(29, 29, 29);
+  color:white;
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Asimovian", sans-serif;
+  font-style: normal;
+}
+
+button, .button {
+  display: inline-block;
+  border: none;
+  padding: 10px 20px;
+  background-color: rgb(218, 95, 76);
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 20px;
+  font-family: inherit;
+  cursor: pointer;
+  margin: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+table, th, td {
+  border: 1px solid rgb(218, 95, 76);
+}
+
+.page-content {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+textarea {
+  width: 100%;
+}
+
+input, select, textarea {
+  background: none;
+  color: inherit;
+  border: 2px solid white;
+  padding: 5px;
+}
+
+#populate-form {
+  font-size: 10px;
+  margin: 0;
+}
