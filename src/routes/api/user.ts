@@ -1,8 +1,6 @@
 import express from 'express';
-const router = express.Router();
+export const router = express.Router();
 
 router.get("/user", (req, res) => {
     res.json(req.user)
 });
-
-module.exports = router;

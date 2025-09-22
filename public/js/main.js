@@ -1,6 +1,8 @@
 let browserData = {}
 
 function populateDatabase(data) {
+    console.log(data)
+
     table = document.getElementById("db_table") // Get table
     table.innerHTML = "" // Clear table
 
@@ -10,7 +12,7 @@ function populateDatabase(data) {
 
     // Create title block
     title = document.createElement("tr")
-    labels = ['battle_id']
+    labels = ['idx']
     labels.push(...Object.keys(data[Object.keys(data)[0]]))
     for (const label of labels) {
         title_value = document.createElement("th")
@@ -48,7 +50,7 @@ function populateDatabase(data) {
         cell_value = document.createElement("td")
         cell_value.innerHTML = `<i class="fa-solid fa-trash"></i>`
         cell_value.addEventListener("click", (e) => {
-            fetch(`/api/data/${key}`, { method: 'DELETE' })
+            fetch(`/api/data/${element.battle_id}`, { method: 'DELETE' })
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -116,29 +118,41 @@ document.getElementById("populate-form").addEventListener('click', (e) => {
     const form = document.getElementById('myForm');
     data_id = document.getElementById("battle_id").value
 
-    for (const key in browserData[data_id]) {
-        const value = browserData[data_id][key];
-
-        if (key == "start") {
-            const date = new Date(value)
-            form.elements["start_minute"].value = date.getMinutes()
-            form.elements["start_hour"].value = date.getHours()
-            form.elements["start_day"].value = date.getDate()
-            form.elements["start_month"].value = date.getMonth()
-            form.elements["start_year"].value = date.getFullYear()
-        } else if (key == "end") {
-            const date = new Date(value)
-            form.elements["end_minute"].value = date.getMinutes()
-            form.elements["end_hour"].value = date.getHours()
-            form.elements["end_day"].value = date.getDate()
-            form.elements["end_month"].value = date.getMonth()
-            form.elements["end_year"].value = date.getFullYear()
+    fetch(`/api/data/${data_id}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        return response.json();
+    })
+    .then(data => {
+        for (const key in data) {
+            const value = data[key];
 
-        try {
-            form.elements[key].value = value
-        } catch {
-            console.log(`Unable to fill element with name ${key}`)
+            if (key == "start") {
+                const date = new Date(value)
+                form.elements["start_minute"].value = date.getMinutes()
+                form.elements["start_hour"].value = date.getHours()
+                form.elements["start_day"].value = date.getDate()
+                form.elements["start_month"].value = date.getMonth()
+                form.elements["start_year"].value = date.getFullYear()
+            } else if (key == "end") {
+                const date = new Date(value)
+                form.elements["end_minute"].value = date.getMinutes()
+                form.elements["end_hour"].value = date.getHours()
+                form.elements["end_day"].value = date.getDate()
+                form.elements["end_month"].value = date.getMonth()
+                form.elements["end_year"].value = date.getFullYear()
+            }
+
+            try {
+                form.elements[key].value = value
+            } catch {
+                console.log(`Unable to fill element with name ${key}`)
+            }
         }
-    }
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+    });
 });

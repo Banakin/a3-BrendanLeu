@@ -1,6 +1,8 @@
+- [x] (style points) typescript
+
 - [x] (15 Points) ExpressJS Server
-- [ ] (10 Points) "Results" that shows all **user** data
-- [ ] (15 Points) Allow user to add/delete/edit their data
+- [x] (10 Points) "Results" that shows all **user** data
+- [x] (15 Points) Allow user to add/delete/edit their data
 - [x] (5 points) HTML Form Tags (`<textarea>`, `<input>`, checkboxes, radio buttons, etc.)
 - [x] (15 Points) MongoDB database
 - [ ] (10 Points) Use CSS framework/template

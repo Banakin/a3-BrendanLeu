@@ -4,7 +4,7 @@ import passport from 'passport';
 export const router = express.Router();
 
 // MongoDB Models
-import { UserModel as User } from "../models/user";
+import { UserModel as User } from "../models/user.js";
 
 // Logout
 router.get('/logout', (req, res, next) => {

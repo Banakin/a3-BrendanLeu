@@ -3,6 +3,7 @@ dotenv.config()
 
 // Imports
 import * as crypto from "crypto";
+import path from 'path';
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
@@ -15,12 +16,13 @@ import type { Request, Response, NextFunction } from 'express';
 import type { Profile } from 'passport-github2';
 
 // Routers
-import { router as dataRouter } from "./routes/api/data";
-import { router as userRouter } from "./routes/api/user";
-import { router as authRouter } from "./routes/auth";
+import { router as dataRouter } from "./routes/api/data.js";
+import { router as userRouter } from "./routes/api/user.js";
+import { router as authRouter } from "./routes/auth.js";
 
 // MongoDB Models
-import { UserModel as User } from "./models/user";
+import { UserModel as User } from "./models/user.js";
+
 
 // Express App
 const app = express();
@@ -29,8 +31,6 @@ const port = 3000;
 // Database
 const client_promise = mongoose.connect(process.env.CONNECTION_STRING!)
 .then(m => m.connection.getClient())
-
-mongoose.connect(process.env.CONNECTION_STRING!);
 
 // Session handling
 app.use(session({
@@ -42,13 +42,13 @@ app.use(session({
       maxAge: 3600000,
       expires: new Date(Date.now() + 3600000) 
   },
-  store: new MongoStore({
+  store: MongoStore.create({
     clientPromise: client_promise,
     dbName: "test",
     stringify: false,
     autoRemove: 'interval',
     autoRemoveInterval: 1
-  })
+  }),
 }));
 app.use(passport.authenticate('session'));
 
@@ -130,7 +130,7 @@ function enforce_logged_in(req: Request, res: Response, next: NextFunction) {
 }
 
 // Serve static files in public/
-let static_file_folder = "public"
+let static_file_folder = path.resolve(import.meta.dirname, '..', 'public')
 app.use(enforce_files, express.static(static_file_folder));
 
 app.use('/api', enforce_logged_in, dataRouter)
@@ -142,7 +142,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-
+// Random password generator
 function random_password(length: number) {
   let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
   let password = '';
