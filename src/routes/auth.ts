@@ -1,9 +1,10 @@
-const express = require('express');
-const passport = require('passport');
-const router = express.Router();
+import type { Request, Response, NextFunction } from 'express';
+import express from 'express';
+import passport from 'passport';
+export const router = express.Router();
 
 // MongoDB Models
-const User = require("../models/user.js");
+import { UserModel as User } from "../models/user";
 
 // Logout
 router.get('/logout', (req, res, next) => {
@@ -21,7 +22,7 @@ router.post(
     failureMessage: true,
     successRedirect: '/'
   }),
-  (req, res, err) => {
+  (err: string | undefined, req: Request, res: Response, next: NextFunction) => {
     if (err) { return next(err); }
   }
 )
@@ -29,14 +30,14 @@ router.post(
 router.post('/register', (req, res) => {
   // Password confirmation
   if (req.body.password !== req.body.password_conf) {
-    err = "passwords must match"
+    const err = "passwords must match"
     res.redirect(303, `/register.html?status=fail&err=${encodeURIComponent(err)}`);
   }
 
   // Email validation
-  email_format = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+  const email_format = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   if (!req.body.email.match(email_format)) {
-    err = "email must be valid"
+    const err = "email must be valid"
     res.redirect(303, `/register.html?status=fail&err=${encodeURIComponent(err)}`);
   }
 
@@ -68,5 +69,3 @@ router.get(
     res.redirect('/');
   }
 );
-
-module.exports = router;

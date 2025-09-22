@@ -1,28 +1,36 @@
-require('dotenv').config() // Load .env
-const crypto = require('node:crypto');
-const express = require('express');
-const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-var GitHubStrategy = require('passport-github2').Strategy;
+import dotenv from 'dotenv'; // Load .env
+dotenv.config()
+
+// Imports
+import * as crypto from "crypto";
+import express from 'express';
+import session from 'express-session';
+import passport from 'passport';
+import { Strategy as GitHubStrategy } from 'passport-github2';
+import MongoStore from 'connect-mongo';
+import mongoose from 'mongoose';
+
+// Types
+import type { Request, Response, NextFunction } from 'express';
+import type { Profile } from 'passport-github2';
 
 // Routers
-const dataRouter = require('./routes/api/data.js')
-const userRouter = require('./routes/api/user.js')
-const authRouter = require('./routes/auth.js')
+import { router as dataRouter } from "./routes/api/data";
+import { router as userRouter } from "./routes/api/user";
+import { router as authRouter } from "./routes/auth";
 
 // MongoDB Models
-const User = require("./models/user.js");
+import { UserModel as User } from "./models/user";
 
 // Express App
 const app = express();
 const port = 3000;
 
 // Database
-const MongoStore = require('connect-mongo');
-const mongoose = require('mongoose');
-mongoose.connect(process.env.CONNECTION_STRING);
-const db = mongoose.connection;
+const client_promise = mongoose.connect(process.env.CONNECTION_STRING!)
+.then(m => m.connection.getClient())
+
+mongoose.connect(process.env.CONNECTION_STRING!);
 
 // Session handling
 app.use(session({
@@ -34,9 +42,12 @@ app.use(session({
       maxAge: 3600000,
       expires: new Date(Date.now() + 3600000) 
   },
-  store: new MongoStore({ 
-    collection: 'sessions',
-    mongoUrl: db.client.s.url
+  store: new MongoStore({
+    clientPromise: client_promise,
+    dbName: "test",
+    stringify: false,
+    autoRemove: 'interval',
+    autoRemoveInterval: 1
   })
 }));
 app.use(passport.authenticate('session'));
@@ -44,26 +55,33 @@ app.use(passport.authenticate('session'));
 // User strategy
 const strategy = User.createStrategy()
 passport.use(strategy);
-passport.serializeUser(User.serializeUser());
+passport.serializeUser(User.serializeUser() as any); // Weird TS hack see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/54932
 passport.deserializeUser(User.deserializeUser());
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Github Strategy
 passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    clientID: process.env.GITHUB_CLIENT_ID!,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     callbackURL: "http://localhost:3000/auth/github/callback"
   },
-  (accessToken, refreshToken, profile, done) => {
-    User.findOne({ githubId: profile.id, email: profile.emails[0].value,})
+  (
+    accessToken: string,
+    refreshToken: string,
+    profile: Profile,
+    done: (err?: Error | null, profile?: any) => void
+  ) => {
+    const email = profile.emails![0]!.value
+    
+    User.findOne({ githubId: profile.id, email: email,})
     .then((user) => {
       // console.log(user)
       if (!user) {
         User.register(
           new User({ 
             githubId: profile.id,
-            email: profile.emails[0].value,
+            email: email,
             username: profile.username 
           }), random_password(16), (err, newUser) => {
             console.log("err: "+err)
@@ -83,14 +101,14 @@ passport.use(new GitHubStrategy({
 app.use(express.urlencoded({ extended: true }))
 
 // Static file middleware 
-function enforce_files(req, res, next) {
-  logged_out = [
+function enforce_files(req: Request, res: Response, next: NextFunction) {
+  const logged_out = [
     '/login.html',
     '/register.html',
     '/',
     '/index.html'
   ]
-  logged_in = [
+  const logged_in = [
     '/portal.html',
   ]
 
@@ -101,18 +119,18 @@ function enforce_files(req, res, next) {
   } else return next()
 }
 
-function enforce_logged_out(req, res, next) {
+function enforce_logged_out(req: Request, res: Response, next: NextFunction) {
   if (req.isAuthenticated()) res.redirect(302, '/portal.html')
   else next()
 }
 
-function enforce_logged_in(req, res, next) {
+function enforce_logged_in(req: Request, res: Response, next: NextFunction) {
   if (!req.isAuthenticated()) res.status(401).send("Unauthorized to access resource");
   else next()
 }
 
 // Serve static files in public/
-static_file_folder = "public"
+let static_file_folder = "public"
 app.use(enforce_files, express.static(static_file_folder));
 
 app.use('/api', enforce_logged_in, dataRouter)
@@ -125,12 +143,12 @@ app.listen(port, () => {
 });
 
 
-function random_password(length) {
+function random_password(length: number) {
   let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
   let password = '';
   const randomBytes = crypto.randomBytes(length);
   for (let i = 0; i < length; i++) {
-    const randomIndex = randomBytes[i] % characters.length;
+    const randomIndex = randomBytes[i]! % characters.length;
     password += characters[randomIndex];
   }
   return password;
