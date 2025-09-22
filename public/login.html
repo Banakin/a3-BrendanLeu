@@ -13,9 +13,22 @@
   <body>
     <div class="page-content">
       <h1><a href="/">Spaceship Battle Log</a></h1>
-      <p>Log and keep track of previous battle encounters.</p>
-      <a class="button" href="login.html">Log In</a>
-      <a class="button" href="register.html">Register</a>
+      <p>Log in</p>
+      <p id="status_notice"></p>
+      <form method="POST" action="auth/login">
+        <p>
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" placeholder="username">
+        </p>
+        <p>
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" placeholder="password">
+        </p>
+        <button>Log In</button>
+        <a class="button secondary-button" href="/register.html">Register</a>
+        <a class="button secondary-button" href="/auth/github">Log In With Github</a>
+      </form>
     </div>
+    <script src="js/status.js"></script>
   </body>
 </html>

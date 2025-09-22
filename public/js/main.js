@@ -71,6 +71,28 @@ function populateDatabase(data) {
     }
 }
 
+function fetchUserInfo() {
+    const name_disp = document.getElementById("username")
+    const email_disp = document.getElementById("email")
+
+    fetch('/api/user')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        name_disp.innerText = data.username;
+        email_disp.innerText = data.email;
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+    });
+}
+
+fetchUserInfo()
+
 function fetchData() {
     fetch('/api/data')
     .then(response => {

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CS4241 Assignment 2 - Brendan Leu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- get rid of favicon error -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <div class="page-content">
+      <h1><a href="/">Spaceship Battle Log</a></h1>
+      <p>Sign Up</p>
+      <p id="status_notice"></p>
+      <form method="POST" action="auth/register">
+        <p>
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" placeholder="username">
+        </p>
+        <p>
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" placeholder="example@example.com">
+        </p>
+        <p>
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" placeholder="password">
+        </p>
+        <p>
+          <label for="password_conf">Confirm Password:</label>
+          <input type="password" name="password_conf" id="password_conf" placeholder="password">
+        </p>
+        <button>Register</button>
+        <a class="button secondary-button" href="/login.html">Log In</a>
+        <a class="button secondary-button" href="/auth/github">Sign Up With Github</a>
+      </form>
+    </div>
+    <script src="js/status.js"></script>
+  </body>
+</html>
