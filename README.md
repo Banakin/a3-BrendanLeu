@@ -1,6 +1,6 @@
 ## Spaceship Battle Log
 
-https://a3-brendan-leu.vercel.app/
+https://a3-brendan-leu.vercel.app/index.html
 
 A battle log for space ships.
 
