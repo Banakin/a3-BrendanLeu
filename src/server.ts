@@ -108,17 +108,17 @@ app.use(express.urlencoded({ extended: true }))
 
 // Static file middleware 
 function enforce_files(req: Request, res: Response, next: NextFunction) {
-  console.log(req)
-  console.log(req.originalUrl)
   const logged_out = [
     '/login.html',
     '/register.html',
-    '/',
     '/index.html'
   ]
   const logged_in = [
     '/portal.html',
   ]
+
+  console.log(req)
+  console.log(req.originalUrl)
 
   if (logged_out.includes(req.originalUrl)) {
     return enforce_logged_out(req, res, next)
@@ -138,7 +138,7 @@ function enforce_logged_in(req: Request, res: Response, next: NextFunction) {
 }
 
 // Serve static files in public/
-let static_file_folder = path.resolve(import.meta.dirname, '..', 'public')
+// let static_file_folder = path.resolve(import.meta.dirname, '..', 'public')
 
 // Serve index.html as root (for some reason vercel is not respecting this with express.static)
 // app.get('/', enforce_logged_out, (req, res) => {
@@ -146,7 +146,7 @@ let static_file_folder = path.resolve(import.meta.dirname, '..', 'public')
 //   res.sendFile(static_file_folder + '/index.html')
 // })
 
-app.use(enforce_files, express.static(static_file_folder));
+// app.use(enforce_files, express.static(static_file_folder));
 
 app.use('/api', enforce_logged_in, dataRouter)
 app.use('/api', enforce_logged_in, userRouter)

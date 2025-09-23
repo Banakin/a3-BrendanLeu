@@ -1,4 +1,19 @@
 {
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "version": 2,
+    "devCommand": "npm run dev",
     "buildCommand": "npm run build",
-    "outputDirectory": "dist"
+    "outputDirectory": "dist",
+    "builds": [
+        {
+            "src": "dist/server.js",
+            "use": "@vercel/node"
+        },
+        {
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "public"
+            }
+        }
+    ]
 }
