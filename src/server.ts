@@ -29,7 +29,7 @@ const app = express();
 const port = 3000;
 
 // Database
-const client_promise = mongoose.connect(process.env.CONNECTION_STRING!)
+const client_promise = mongoose.connect(process.env.A3_STORAGE_MONGODB_URI!)
 .then(m => m.connection.getClient())
 
 // Session handling
