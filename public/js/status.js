@@ -2,12 +2,16 @@ var urlParams = new URLSearchParams(window.location.search)
 
 let state = urlParams.get('status') || 'new'
 
-let p = document.getElementById('status_notice')
+if (state != 'new') {
+    let notice = document.getElementById('status_notice')
+    
 
-p.innerText = `STATUS ${state}`
+    notice.innerText = `STATUS ${state}`
 
-err = urlParams.get('err') || "none"
-if (err != "none") {
-    p.innerText = p.innerText + `\nERR ${err}`
-    console.warn(err)
+    err = urlParams.get('err') || "none"
+    if (err != "none") {
+        notice.innerText = notice.innerText + `\nERR ${err}`
+        console.warn(err)
+    }
+
 }

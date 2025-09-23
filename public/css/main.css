@@ -1,6 +1,10 @@
+/* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Asimovian&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-body {
+/* Bulma */
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
+
+/* body {
   background:rgb(29, 29, 29);
   color:white;
   font-family: "Roboto Mono", monospace;
@@ -67,4 +71,4 @@ input, select, textarea {
 #populate-form {
   font-size: 10px;
   margin: 0;
-}
+} */

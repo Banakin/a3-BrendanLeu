@@ -11,24 +11,31 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   </head>
   <body>
-    <div class="page-content">
-      <h1><a href="/">Spaceship Battle Log</a></h1>
-      <p>Log in</p>
-      <p id="status_notice"></p>
+    <section class="section">
+      <h1 class="title is-1"><a href="/">Spaceship Battle Log</a></h1>
+      <h2 class="title is-3">Log in</h2>
+      <div id="status_notice" class="notification is-danger is-light"></div>
       <form method="POST" action="auth/login">
         <p>
-          <label for="username">Username:</label>
-          <input type="text" name="username" id="username" placeholder="username">
+          <label for="email">Email:</label>
+          <input class="input" type="text" name="email" id="email" placeholder="email">
         </p>
         <p>
           <label for="password">Password:</label>
-          <input type="password" name="password" id="password" placeholder="password">
+          <input class="input" type="password" name="password" id="password" placeholder="password">
         </p>
-        <button>Log In</button>
+        <button class="button">Log In</button>
         <a class="button secondary-button" href="/register.html">Register</a>
-        <a class="button secondary-button" href="/auth/github">Log In With Github</a>
+        <a class="button secondary-button" href="/auth/github">
+          <span class="icon">
+            <i class="fa-brands fa-github"></i>
+          </span>
+          <span>
+            Sign Up With Github
+          </span>
+        </a>
       </form>
-    </div>
+    </section>
     <script src="js/status.js"></script>
   </body>
 </html>

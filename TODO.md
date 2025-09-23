@@ -5,12 +5,13 @@
 - [x] (15 Points) Allow user to add/delete/edit their data
 - [x] (5 points) HTML Form Tags (`<textarea>`, `<input>`, checkboxes, radio buttons, etc.)
 - [x] (15 Points) MongoDB database
-- [ ] (10 Points) Use CSS framework/template
+- [x] (10 Points) Use CSS framework/template
+  - [x] https://bulma.io/
 - [ ] (10 points) Get 90% on lighthouse `Performance`, `Best Practices`, `Accessibility`, and `SEO`
 
 - [x] (10 points) OAuth authentication
   - [x] Passport auth
-- [ ] (5 points) Other service than render
+- [x] (5 points) Other service than render
 - [ ] (5 points) Get 100% on lighthouse
 
 - (10 points) Make your site accessible using the [resources and hints available from the W3C](https://www.w3.org/WAI/). Implement/follow twelve tips from their [tips for writing](https://www.w3.org/WAI/tips/writing/), [tips for designing](https://www.w3.org/WAI/tips/designing/), and [tips for development](https://www.w3.org/WAI/tips/developing/). *Note that all twelve must require active work on your part*. For example, even though your page will most likely not have a captcha, you don't get this as one of your twelve tips to follow because you're effectively getting it "for free" without having to actively change anything about your site. Contact the course staff if you have any questions about what qualifies and doesn't qualify in this regard. List each tip that you followed and describe what you did to follow it in your site.

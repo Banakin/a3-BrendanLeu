@@ -11,32 +11,39 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   </head>
   <body>
-    <div class="page-content">
-      <h1><a href="/">Spaceship Battle Log</a></h1>
-      <p>Sign Up</p>
-      <p id="status_notice"></p>
+    <section class="section">
+      <h1 class="title is-1"><a href="/">Spaceship Battle Log</a></h1>
+      <h2 class="title is-3">Sign Up</h2>
+      <div id="status_notice" class="notification is-danger is-light"></div>
       <form method="POST" action="auth/register">
         <p>
           <label for="username">Username:</label>
-          <input type="text" name="username" id="username" placeholder="username">
+          <input class="input" type="text" name="username" id="username" placeholder="username">
         </p>
         <p>
           <label for="email">Email:</label>
-          <input type="email" name="email" id="email" placeholder="example@example.com">
+          <input class="input" type="email" name="email" id="email" placeholder="example@example.com">
         </p>
         <p>
           <label for="password">Password:</label>
-          <input type="password" name="password" id="password" placeholder="password">
+          <input class="input" type="password" name="password" id="password" placeholder="password">
         </p>
         <p>
           <label for="password_conf">Confirm Password:</label>
-          <input type="password" name="password_conf" id="password_conf" placeholder="password">
+          <input class="input" type="password" name="password_conf" id="password_conf" placeholder="password">
         </p>
-        <button>Register</button>
+        <button class="button">Register</button>
         <a class="button secondary-button" href="/login.html">Log In</a>
-        <a class="button secondary-button" href="/auth/github">Sign Up With Github</a>
+        <a class="button secondary-button" href="/auth/github">
+          <span class="icon">
+            <i class="fa-brands fa-github"></i>
+          </span>
+          <span>
+            Sign Up With Github
+          </span>
+        </a>
       </form>
-    </div>
+    </section>
     <script src="js/status.js"></script>
   </body>
 </html>
