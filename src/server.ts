@@ -23,7 +23,7 @@ import { router as authRouter } from "./routes/auth.js";
 // MongoDB Models
 import { UserModel as User } from "./models/user.js";
 
-console.log(`env vars: ${process.env}`)
+// console.log(`env vars: ${process.env}`)
 
 // Express App
 const app = express();
@@ -90,8 +90,8 @@ passport.use(new GitHubStrategy({
             email: email,
             username: profile.username 
           }), random_password(16), (err, newUser) => {
-            console.log("err: "+err)
-            console.log("new_usr:"+newUser)
+            // console.log("err: "+err)
+            // console.log("new_usr:"+newUser)
             if (err) { return done(err) }
             else { return done(null, newUser) }
           }
@@ -137,7 +137,7 @@ function enforce_logged_in(req: Request, res: Response, next: NextFunction) {
 
 // Serve static files in public/
 let static_file_folder = path.resolve(import.meta.dirname, '..', 'public')
-app.use(enforce_files, express.static(static_file_folder));
+app.use('/', enforce_files, express.static(static_file_folder));
 
 app.use('/api', enforce_logged_in, dataRouter)
 app.use('/api', enforce_logged_in, userRouter)
