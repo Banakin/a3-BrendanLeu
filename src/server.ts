@@ -60,11 +60,16 @@ passport.deserializeUser(User.deserializeUser());
 app.use(passport.initialize());
 app.use(passport.session());
 
+let callbackURL = "http://localhost:3000"
+if (process.env.VERCEL_ENV != "development") {
+  callbackURL = "https://" + process.env.VERCEL_URL
+}
+
 // Github Strategy
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID!,
     clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-    callbackURL: "http://localhost:3000/auth/github/callback"
+    callbackURL: callbackURL + "/auth/github/callback"
   },
   (
     accessToken: string,
