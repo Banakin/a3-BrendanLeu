@@ -23,10 +23,11 @@ import { router as authRouter } from "./routes/auth.js";
 // MongoDB Models
 import { UserModel as User } from "./models/user.js";
 
+console.log(`env vars: ${process.env}`)
 
 // Express App
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Database
 const client_promise = mongoose.connect(process.env.A3_DATABASE_MONGODB_URI!)

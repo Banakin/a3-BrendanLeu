@@ -1,8 +1,8 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
+  "name": "spaceship-battle-log",
+  "version": "1.0.0",
+  "description": "Spaceship battle log for logging space battles and encounters.",
+  "author": "Brendan Leu",
   "type": "module",
   "scripts": {
     "build": "npx tsc --build --verbose",
