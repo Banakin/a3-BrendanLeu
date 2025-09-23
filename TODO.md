@@ -7,7 +7,7 @@
 - [x] (15 Points) MongoDB database
 - [x] (10 Points) Use CSS framework/template
   - [x] https://bulma.io/
-- [ ] (10 points) Get 90% on lighthouse `Performance`, `Best Practices`, `Accessibility`, and `SEO`
+- [x] (10 points) Get 90% on lighthouse `Performance`, `Best Practices`, `Accessibility`, and `SEO`
 
 - [x] (10 points) OAuth authentication
   - [x] Passport auth
