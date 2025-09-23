@@ -62,7 +62,7 @@ app.use(passport.session());
 
 let callbackURL = "http://localhost:3000"
 if (process.env.VERCEL_ENV != "development") {
-  callbackURL = "https://" + process.env.VERCEL_URL
+  callbackURL = "https://a3-brendan-leu.vercel.app"
 }
 
 // Github Strategy
