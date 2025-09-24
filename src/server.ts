@@ -112,6 +112,7 @@ function enforce_files(req: Request, res: Response, next: NextFunction) {
   const logged_out = [
     '/login.html',
     '/register.html',
+    '/',
     '/index.html'
   ]
   const logged_in = [
