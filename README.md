@@ -9,7 +9,7 @@ A battle log for space ships.
 - When building the application, I knew I wanted to use passport as I want to roll my own auth for a personal project of mine. I started with that, because that requires a lot of work throughout the application.
 - This then requires the database, so I implemented MongoDB with Mongoose at this time. I achieved this and then with the time extension, decided to migrate the project to TypeScript for further development.
 - After this I added the CSS library. I chose https://bulma.io/ because it is simple and works without libraries, focusing on functionality over looks.
-- Lastly I deployed the vercel and cleaned up the styles.
+- Lastly I deployed with docker and cleaned up the styles.
 - The express middlewares I used include `connect-mongo`, `express-session`, `passport`, `enforce_files`.
   - `passport` is used for login and authentication management
   - `express-session` is used for browser authentication session management
@@ -20,6 +20,7 @@ A battle log for space ships.
 - OAuth Implementation using PassportJS. Includes both email/password and GitHub authentication flows.
 - Deployed application using Vercel.
   - I personally use vercel and netlify for some of my websites. I chose vercel because they include easy database integration, good cli tooling, and offer a good free tier. Netlify or Cloudflare may have also worked but I knew vercel would get the job done.
+  - Update: I had issues rendering index.html at the root. Index.html was fine but the root could not be fixed on vercel. Netlify had a process I did not feel like learning. I decided to deploy with docker using Github and a home server set up with an Nginx reverse proxy.
 - Migrated server side codebase into TypeScript. (Maybe 5-10 points?)
 - TODO: 100% Lighthouse (include image)
 
