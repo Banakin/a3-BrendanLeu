@@ -21,7 +21,14 @@ router.post(
     failureRedirect: '/login.html?status=fail',
     failureMessage: true,
     successRedirect: '/'
-  }),
+  }
+  // , (err: string | undefined, user: typeof User, info: any, status: any) => {
+  //   console.log(err)
+  //   console.log(user)
+  //   console.log(info)
+  //   console.log(status)
+  // }
+  ),
   (err: string | undefined, req: Request, res: Response, next: NextFunction) => {
     if (err) { return next(err); }
   }
