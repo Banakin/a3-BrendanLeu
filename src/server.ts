@@ -10,6 +10,7 @@ import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import MongoStore from 'connect-mongo';
 import mongoose from 'mongoose';
+import url from 'url';
 
 // Types
 import type { Request, Response, NextFunction } from 'express';
@@ -30,7 +31,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Database
-console.log(process.env.A3_DATABASE_MONGODB_URI)
 const client_promise = mongoose.connect(process.env.A3_DATABASE_MONGODB_URI!)
 .then(m => m.connection.getClient())
 
@@ -119,12 +119,12 @@ function enforce_files(req: Request, res: Response, next: NextFunction) {
     '/portal.html',
   ]
 
-  console.log(req)
-  console.log(req.originalUrl)
-
-  if (logged_out.includes(req.originalUrl)) {
+  // console.log(req)
+  const file_url_path = url.parse(req.url, true).pathname!
+  console.log(file_url_path)
+  if (logged_out.includes(file_url_path)) {
     return enforce_logged_out(req, res, next)
-  } else if (logged_in.includes(req.originalUrl)) {
+  } else if (logged_in.includes(file_url_path)) {
     return enforce_logged_in(req, res, next)
   } else return next()
 }

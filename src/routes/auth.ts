@@ -47,6 +47,7 @@ router.post('/register', (req, res) => {
       username: req.body.username 
     }), req.body.password, (err, msg) => {
       if (err) {
+        console.error(err);
         res.redirect(303, `/register.html?status=fail&err=${encodeURIComponent(err)}`);
       } else {
         res.redirect(303, '/login.html?status=success');

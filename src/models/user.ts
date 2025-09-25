@@ -22,8 +22,9 @@ const UserSchema = new Schema<UserDocument>({
   githubId: {
     type: String,
     required: false,
-    unique: true
-  },
+    unique: true,
+    sparse: true
+  }
 });
 
 UserSchema.plugin(passportLocalMongoose);
