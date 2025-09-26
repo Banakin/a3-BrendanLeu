@@ -18,7 +18,7 @@ A battle log for space ships.
 
 ### Technical Achievements
 - OAuth Implementation using PassportJS. Includes both email/password and GitHub authentication flows.
-- Deployed application using Vercel.
+- Deployed application using Docker.
   - I personally use vercel and netlify for some of my websites. I chose vercel because they include easy database integration, good cli tooling, and offer a good free tier. Netlify or Cloudflare may have also worked but I knew vercel would get the job done.
   - Update: I had issues rendering index.html at the root. Index.html was fine but the root could not be fixed on vercel. Netlify had a process I did not feel like learning. I decided to deploy with docker using Github and a home server set up with an Nginx reverse proxy.
 - Migrated server side codebase into TypeScript. (Maybe 5-10 points?)
