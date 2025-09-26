@@ -22,11 +22,7 @@ A battle log for space ships.
   - I personally use vercel and netlify for some of my websites. I chose vercel because they include easy database integration, good cli tooling, and offer a good free tier. Netlify or Cloudflare may have also worked but I knew vercel would get the job done.
   - Update: I had issues rendering index.html at the root. Index.html was fine but the root could not be fixed on vercel. Netlify had a process I did not feel like learning. I decided to deploy with docker using Github and a home server set up with an Nginx reverse proxy.
 - Migrated server side codebase into TypeScript. (Maybe 5-10 points?)
-- TODO: 100% Lighthouse (include image)
-
-### Design/Evaluation Achievements
-- TODO: (10 points) Make your site accessible using the [resources and hints available from the W3C](https://www.w3.org/WAI/). Implement/follow twelve tips from their [tips for writing](https://www.w3.org/WAI/tips/writing/), [tips for designing](https://www.w3.org/WAI/tips/designing/), and [tips for development](https://www.w3.org/WAI/tips/developing/). *Note that all twelve must require active work on your part*. For example, even though your page will most likely not have a captcha, you don't get this as one of your twelve tips to follow because you're effectively getting it "for free" without having to actively change anything about your site. Contact the course staff if you have any questions about what qualifies and doesn't qualify in this regard. List each tip that you followed and describe what you did to follow it in your site.
-- TODO: (5 points) Describe how your site uses the CRAP principles in the Non-Designer's Design Book readings. Which element received the most emphasis (contrast) on each page? How did you use proximity to organize the visual information on your page? What design elements (colors, fonts, layouts, etc.) did you use repeatedly throughout your site? How did you use alignment to organize information and/or increase contrast for particular elements. Write a paragraph of at least 125 words *for each of four principles* (four paragraphs, 500 words in total). 
+- 100% Lighthouse
 
 ### Todo List
 - [x] (style points) typescript
@@ -45,7 +41,7 @@ A battle log for space ships.
   - PassportJS auth
   - Github auth
 - [x] (5 points - 95) Other service than render
-- [ ] (5 points) Get 100% on lighthouse
+- [x] (5 points - 100 ) Get 100% on lighthouse
 
 - [ ] (10 points) https://www.w3.org/WAI/ Accessibility
 - [ ] (5 points) CRAP principles

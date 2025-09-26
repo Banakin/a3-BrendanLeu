@@ -1,34 +1,22 @@
 let browserData = {}
 
 function populateDatabase(data) {
-    console.log(data)
-
-    table = document.getElementById("db_table") // Get table
+    table = document.getElementById("db_list") // Get table
     table.innerHTML = "" // Clear table
 
     if (Object.keys(data).length == 0) {
         table.innerHTML = "<p>No logs...</p>"
     }
 
-    // Create title block
-    title = document.createElement("tr")
-    labels = ['idx']
-    labels.push(...Object.keys(data[Object.keys(data)[0]]))
-    for (const label of labels) {
-        title_value = document.createElement("th")
-        title_value.innerText = label
-        title.appendChild(title_value)
-    }
-    table.appendChild(title)
-
     // Create data point blocks
-    for (let key in data) {
+    for (let i = 0; i < Object.keys(data).length; i++) {
+        const key = Object.keys(data)[i]
         const element = data[key];
         
-        datapoint = document.createElement("tr")
-        // Add ID
-        cell_value = document.createElement("td")
-        cell_value.innerText = key
+        datapoint = document.createElement("ul")
+
+        cell_value = document.createElement("ul")
+        cell_value.innerText = `ARRAY_INDEX ${i}`;
         datapoint.appendChild(cell_value)
 
         // Go through each key/object pair
@@ -40,8 +28,8 @@ function populateDatabase(data) {
                     value = new Date(value).toLocaleString("en-US")
                 }
 
-                cell_value = document.createElement("td")
-                cell_value.innerText = value
+                cell_value = document.createElement("ul")
+                cell_value.innerText = `${key}:${value}`;
                 datapoint.appendChild(cell_value)
             }
         }
@@ -64,7 +52,7 @@ function populateDatabase(data) {
                 fetchData()
             })
             .catch(error => {
-                console.error('Error deleting resource:', error);
+                console.warn('Error deleting resource:', error);
             });
         })
         datapoint.appendChild(cell_value)
@@ -89,7 +77,7 @@ function fetchUserInfo() {
         email_disp.innerText = data.email;
     })
     .catch(error => {
-        console.error('Fetch error:', error);
+        console.warn('Fetch error:', error);
     });
 }
 
@@ -108,7 +96,7 @@ function fetchData() {
         populateDatabase(data);
     })
     .catch(error => {
-        console.error('Fetch error:', error);
+        console.warn('Fetch error:', error);
     });
 }
 
@@ -153,6 +141,6 @@ document.getElementById("populate-form").addEventListener('click', (e) => {
         }
     })
     .catch(error => {
-        console.error('Fetch error:', error);
+        console.warn('Fetch error:', error);
     });
 });

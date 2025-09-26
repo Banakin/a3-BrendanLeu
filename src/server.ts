@@ -11,6 +11,7 @@ import { Strategy as GitHubStrategy } from 'passport-github2';
 import MongoStore from 'connect-mongo';
 import mongoose from 'mongoose';
 import url from 'url';
+import compression from 'compression';
 
 // Types
 import type { Request, Response, NextFunction } from 'express';
@@ -29,6 +30,7 @@ import { UserModel as User } from "./models/user.js";
 // Express App
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(compression())
 
 // Database
 const client_promise = mongoose.connect(process.env.A3_DATABASE_MONGODB_URI!)
@@ -121,7 +123,6 @@ function enforce_files(req: Request, res: Response, next: NextFunction) {
 
   // console.log(req)
   const file_url_path = url.parse(req.url, true).pathname!
-  console.log(file_url_path)
   if (logged_out.includes(file_url_path)) {
     return enforce_logged_out(req, res, next)
   } else if (logged_in.includes(file_url_path)) {
@@ -135,7 +136,7 @@ function enforce_logged_out(req: Request, res: Response, next: NextFunction) {
 }
 
 function enforce_logged_in(req: Request, res: Response, next: NextFunction) {
-  if (!req.isAuthenticated()) res.status(401).send("Unauthorized to access resource");
+  if (!req.isAuthenticated()) res.redirect(302, '/');
   else next()
 }
 
